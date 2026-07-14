@@ -10,8 +10,13 @@
         <h1>👋 Bonjour, je suis <span>Codou Sarr</span></h1>
         <h3>Développeuse Full Stack</h3>
         <p>Je conçois des applications web modernes et performantes avec Angular, Laravel, ASP.NET et Java JEE.</p>
-        <button routerLink="/projects">Voir mes projets</button>
-        <button routerLink="/projects">Télécharger mon CV</button>
+
+        <div class="button-group">
+            <button class="btn-primary" routerLink="/projects">Voir mes projets</button>
+            <button class="btn-secondary" (click)="downloadCV()">
+                📄 Télécharger mon CV
+            </button>
+        </div>
     </div>
 
     <div class="profile-img-container">

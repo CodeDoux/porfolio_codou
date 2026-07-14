@@ -48,6 +48,7 @@
 .intro {
     flex: 1;
     z-index: 2;
+    min-width: 0;
     animation: slideInLeft 1s ease-out;
 }
 
@@ -101,22 +102,38 @@
     max-width: 600px;
 }
 
-button {
-    padding: 16px 48px;
-    font-size: 1.1rem;
+/* ---------- BOUTONS ---------- */
+.button-group {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 16px 40px;
+    font-size: 1.05rem;
     font-weight: 600;
-    color: #000000;
-    background: linear-gradient(135deg, #ff8c00 0%, #ffd700 100%);
-    border: none;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.4s ease;
-    box-shadow: 0 8px 24px rgba(255, 140, 0, 0.3);
     position: relative;
     overflow: hidden;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
 }
 
-button::before {
+.btn-primary {
+    color: #000000;
+    background: linear-gradient(135deg, #ff8c00 0%, #ffd700 100%);
+    box-shadow: 0 8px 24px rgba(255, 140, 0, 0.3);
+}
+
+.btn-primary::before {
     content: '';
     position: absolute;
     top: 0;
@@ -127,19 +144,49 @@ button::before {
     transition: left 0.5s;
 }
 
-button:hover::before {
+.btn-primary:hover::before {
     left: 100%;
 }
 
-button:hover {
+.btn-primary:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 32px rgba(255, 140, 0, 0.5);
 }
 
-button:active {
+.btn-primary:active {
     transform: translateY(-1px);
 }
 
+.btn-secondary {
+    color: #ffd700;
+    background: transparent;
+    border: 2px solid rgba(255, 140, 0, 0.5);
+}
+
+.btn-secondary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 140, 0, 0.1), rgba(255, 215, 0, 0.1));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.btn-secondary:hover::before {
+    opacity: 1;
+}
+
+.btn-secondary:hover {
+    border-color: #ffd700;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.25);
+}
+
+.btn-secondary:active {
+    transform: translateY(-1px);
+}
+
+/* ---------- PHOTO DE PROFIL ---------- */
 .profile-img-container {
     flex: 0 0 auto;
     z-index: 2;
@@ -176,6 +223,7 @@ button:active {
     50% { transform: translateY(-20px); }
 }
 
+/* ---------- DÉCORATIONS ---------- */
 .decorative-elements {
     position: absolute;
     width: 100%;
@@ -225,20 +273,41 @@ button:active {
     to { transform: rotate(360deg); }
 }
 
-/* ========================================= */
-/* RESPONSIVE - TABLETTE (max-width: 1024px) */
-/* ========================================= */
+/* =============================================== */
+/* RESPONSIVE                                      */
+/* Breakpoints : 1440 / 1024 / 768 / 480 / 360      */
+/* =============================================== */
+
+/* ---------- GRAND ÉCRAN (max-width: 1440px) ---------- */
+@media (max-width: 1440px) {
+    .home {
+        gap: 3rem;
+    }
+
+    .profile-img {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+/* ---------- TABLETTE (max-width: 1024px) ---------- */
 @media (max-width: 1024px) {
     .home {
-        flex-direction: column;
+        flex-direction: column-reverse;
         text-align: center;
-        padding: 5% 5%;
+        padding: 5% 6%;
         gap: 3rem;
         margin-top: 70px;
     }
 
+    .intro {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .intro h1 {
-        font-size: 2.5rem;
+        font-size: 2.6rem;
     }
 
     .intro h3 {
@@ -250,18 +319,22 @@ button:active {
         margin-right: auto;
     }
 
+    .button-group {
+        justify-content: center;
+    }
+
     .profile-img {
-        width: 350px;
-        height: 350px;
+        width: 320px;
+        height: 320px;
     }
 }
 
-/* ========================================= */
-/* RESPONSIVE - MOBILE (max-width: 768px)     */
-/* ========================================= */
+/* ---------- MOBILE (max-width: 768px) ---------- */
 @media (max-width: 768px) {
     .home {
         margin-top: 65px;
+        padding: 6% 6%;
+        gap: 2.5rem;
     }
 
     .intro h1 {
@@ -274,22 +347,22 @@ button:active {
 
     .intro p {
         font-size: 1rem;
+        margin-bottom: 2rem;
     }
 
     .profile-img {
-        width: 280px;
-        height: 280px;
+        width: 260px;
+        height: 260px;
     }
 
-    button {
-        padding: 14px 36px;
-        font-size: 1rem;
+    .btn-primary,
+    .btn-secondary {
+        padding: 14px 32px;
+        font-size: 0.95rem;
     }
 }
 
-/* ========================================= */
-/* RESPONSIVE - PETIT MOBILE (max-width: 480px) */
-/* ========================================= */
+/* ---------- PETIT MOBILE (max-width: 480px) ---------- */
 @media (max-width: 480px) {
     .home {
         padding: 6% 5%;
@@ -309,12 +382,57 @@ button:active {
     }
 
     .profile-img {
-        width: 220px;
-        height: 220px;
+        width: 200px;
+        height: 200px;
     }
 
-    button {
-        padding: 12px 28px;
-        font-size: 0.95rem;
+    .button-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        padding: 13px 24px;
+        font-size: 0.9rem;
+    }
+
+    .circle-1,
+    .circle-2,
+    .circle-3 {
+        display: none; /* évite l'encombrement visuel sur très petit écran */
+    }
+}
+
+/* ---------- TRÈS PETIT MOBILE (max-width: 360px) ---------- */
+@media (max-width: 360px) {
+    .home {
+        margin-top: 60px;
+        padding: 8% 4%;
+    }
+
+    .intro h1 {
+        font-size: 1.5rem;
+    }
+
+    .intro h3 {
+        font-size: 1rem;
+    }
+
+    .intro p {
+        font-size: 0.88rem;
+        line-height: 1.6;
+    }
+
+    .profile-img {
+        width: 170px;
+        height: 170px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        font-size: 0.85rem;
+        padding: 12px 20px;
     }
 }
